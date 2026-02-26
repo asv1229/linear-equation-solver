@@ -80,21 +80,19 @@ elif mode == "Trigonometry":
             if -1 <= value <= 1:
                 trigresult_rad = math.asin(value)
                 trigresult_deg = math.degrees(trigresult_rad)
-                st.success(f"Result: $\\arcsin({value}) = {round(trigresult_deg, 4)}^\circ$")
             else:
                 st.error("Input for Inverse Sine must be between -1 and 1")
 
-    elif trigfunc == "inverse cosine":
-        if -1 <= value <= 1:
-            trigresult_rad = math.acos(value)
-            trigresult_deg = math.degrees(trigresult_rad)
-            st.success(f"Result: $\\arccos({value}) = {round(trigresult_deg, 4)}^\circ$")
-        else:
-            st.error("Input for Inverse Cosine must be between -1 and 1")
+        elif trigfunc == "inverse cosine":
+            if -1 <= value <= 1:
+                trigresult_rad = math.acos(value)
+                trigresult_deg = math.degrees(trigresult_rad)
+            else:
+                st.error("Input for Inverse Cosine must be between -1 and 1")
 
-    elif trigfunc == "inverse tangent":
-        trigresult_rad = math.atan(value)
-        trigresult_deg = math.degrees(trigresult_rad)
+        elif trigfunc == "inverse tangent":
+            trigresult_rad = math.atan(value)
+            trigresult_deg = math.degrees(trigresult_rad)
         st.success(f"Result: $\\arctan({value}) = {round(trigresult_deg, 4)}^\circ$")
 
 
@@ -247,5 +245,6 @@ elif mode == "Unit Conversion":
                 result = celsius + 273.15
             
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
