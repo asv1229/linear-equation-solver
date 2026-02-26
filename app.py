@@ -98,8 +98,9 @@ elif mode == "Quadratics":
     a = st.number_input("Value for a", value = 0.0)
     b = st.number_input("Value for b", value = 0.0)
     c = st.number_input("Value for b", value = 1.0)
-    solution1 = (-b + sqrt(b^2 -4*a*c))/(2*a)
-    solution2 = (-b - sqrt(b^2 -4*a*c))/(2*a)
+    solution1 = (-b + (b**2 -4*a*c)**0.5)/(2*a)
+    solution2 = (-b - (b**2 -4*a*c)**0.5)/(2*a)
     st.success(f"Results are {solution1} and {solution2}")
+
 
 
