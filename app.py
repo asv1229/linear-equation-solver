@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 import sympy as sp
-import panda as pd
+import pandas as pd
 from scipy import stats
 
 
@@ -186,6 +186,7 @@ elif mode == "Statistics":
 
         except ValueError:
             st.error("Check your input! Make sure you only use numbers and commas.")
+
 
 
 
