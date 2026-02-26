@@ -275,6 +275,7 @@ elif mode == "Unit Conversion":
         with col2:
             to_unit = st.selectbox("To:", list(data_units.keys()))
         if st.button("Convert", key="btn_data"):
-            result = (input_value *weight_units[from_unit]) / weight_units[to_unit]
+            result = (input_value * data_units[from_unit]) / data_units[to_unit]
+
 
 
