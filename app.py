@@ -255,16 +255,16 @@ elif mode == "Unit Conversion":
 
     elif unit == "Data":
         data_units = {
-            "Megabyte": 1.0
-            "Bit": 0.000000125
-            "Nibble": 0.0000005
-            "Byte": 0.000001
-            "Kilobyte": 0.001
-            "Gigabyte": 1000
-            "Terabyte": 1000000
-            "Petabyte": 1000000000
-            "Exabyte": 1000000000000
-            "Zettabyte":1000000000000
+            "Megabyte": 1.0,
+            "Bit": 0.000000125,
+            "Nibble": 0.0000005,
+            "Byte": 0.000001,
+            "Kilobyte": 0.001,
+            "Gigabyte": 1000,
+            "Terabyte": 1000000,
+            "Petabyte": 1000000000,
+            "Exabyte": 1000000000000,
+            "Zettabyte":1000000000000,
             "Yottabyte": 1000000000000000000
         }
             
@@ -276,4 +276,5 @@ elif mode == "Unit Conversion":
             to_unit = st.selectbox("To:", list(data_units.keys()))
         if st.button("Convert", key="btn_data"):
             result = (input_value *weight_units[from_unit]) / weight_units[to_unit]
+
 
