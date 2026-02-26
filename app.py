@@ -151,7 +151,7 @@ elif mode == "Calculus":
 
 
 elif mode == "Statistics":
-st.header("Statistics Dashboard")
+    st.header("Statistics Dashboard")
     st.write("Enter your data points separated by commas.")
 
     raw_data = st.text_area("Data Points:", value="0, 0")
@@ -186,6 +186,7 @@ st.header("Statistics Dashboard")
 
         except ValueError:
             st.error("Check your input! Make sure you only use numbers and commas.")
+
 
 
 
