@@ -3,13 +3,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 import sympy as sp
+import panda as pd
+from scipy import stats
 
 
 st.set_page_config(layout="wide")
 st.set_page_config(page_title="Linear Equation Solver", page_icon="📈")
 st.title("Math Solver")
 
-mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry", "Quadratics", "Calculus"])
+mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry", "Quadratics", "Calculus", "Statistics"])
 
 if mode == "Single Equation":
     st.header("Solve $ax + b = c$")
@@ -121,7 +123,7 @@ elif mode == "Quadratics":
 
 
 
-if mode == "Calculus":
+elif mode == "Calculus":
     st.header("Calculus Solver")
 
     # Instructions for the user
@@ -144,6 +146,47 @@ if mode == "Calculus":
             st.latex(r"\int f(x) \, dx = " + sp.latex(integ) + r" + C")
         except Exception as e:
             st.error(f"Math Error: Could not parse '{user_input}'. Check your syntax!")
+
+
+
+
+elif mode == "Statistics":
+st.header("Statistics Dashboard")
+    st.write("Enter your data points separated by commas.")
+
+    raw_data = st.text_area("Data Points:", value="0, 0")
+
+    if raw_data:
+        try:
+            data_list = [float(x.strip()) for x in raw_data.split(",") if x.strip()]
+            
+            if len(data_list) > 0:
+                mean_val = np.mean(data_list)
+                median_val = np.median(data_list)
+                std_val = np.std(data_list)
+                min_val = np.min(data_list)
+                max_val = np.max(data_list)
+                
+                col1, col2, col3 = st.columns(3)
+                col1.metric("Mean (Average)", f"{mean_val:.2f}")
+                col2.metric("Median", f"{median_val:.2f}")
+                col3.metric("Std. Deviation", f"{std_val:.2f}")
+
+                col4, col5, col6 = st.columns(3)
+                col4.metric("Minimum", f"{min_val}")
+                col5.metric("Maximum", f"{max_val}")
+                col6.metric("Total Count", len(data_list))
+
+                st.subheader("Data Distribution")
+                chart_data = pd.DataFrame(data_list, columns=['Value'])
+                st.bar_chart(chart_data['Value'].value_counts().sort_index())
+
+            else:
+                st.warning("Please enter at least one number.")
+
+        except ValueError:
+            st.error("Check your input! Make sure you only use numbers and commas.")
+
 
 
 
