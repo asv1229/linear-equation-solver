@@ -276,6 +276,6 @@ elif mode == "Unit Conversion":
             to_unit = st.selectbox("To:", list(data_units.keys()))
         if st.button("Convert", key="btn_data"):
             result = (input_value * data_units[from_unit]) / data_units[to_unit]
-
+            st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
 
 
