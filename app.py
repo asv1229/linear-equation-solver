@@ -125,7 +125,7 @@ if mode == "Calculus":
     # Instructions for the user
     st.info("Note: Use * for multiplication (3*x) and ** for powers (x**2)")
 
-    user_input = st.text_input("Enter your function of x:", value="x**2 + 5*x")
+    user_input = st.text_input("Enter your function of x:", value="x**2 + 5*x").strip()
 
     if user_input:
         try:
@@ -159,6 +159,7 @@ if mode == "Calculus":
         
         except Exception as e:
             st.error(f"Math Error: Could not parse '{user_input}'. Check your syntax!")
+
 
 
 
