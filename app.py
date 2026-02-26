@@ -8,7 +8,7 @@ from scipy import stats
 
 
 st.set_page_config(layout="wide")
-st.set_page_config(page_title="Linear Equation Solver", page_icon="📈")
+st.set_page_config(page_title="A Math Solver", page_icon="➕")
 st.title("Math Solver")
 
 mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry", "Quadratics", "Calculus", "Statistics", "Unit Conversion"])
@@ -247,4 +247,5 @@ elif mode == "Unit Conversion":
                 result = celsius + 273.15
             
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
