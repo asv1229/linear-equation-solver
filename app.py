@@ -120,28 +120,37 @@ elif mode == "Quadratics":
 
 
 if mode == "Calculus":
-    x = sp.Symbol('x')
-
     st.header("Calculus Solver")
-    user_input = st.text_input("Enter a function of x", value="x**2 + 3*x + 2")
 
-    try:
-        expr = sp.sympify(user_input)
-    
-        col1, col2 = st.columns(2)
+    # Instructions for the user
+    st.info("Note: Use * for multiplication (3*x) and ** for powers (x**2)")
 
-        with col1:
-            st.subheader("Derivative")
-            derivative = sp.diff(expr, x)
-            st.latex(f"\\frac{{d}}{{dx}}({sp.latex(expr)}) = {sp.latex(derivative)}")
+    user_input = st.text_input("Enter your function of x:", value="x**2 + 5*x")
 
-        with col2:
-            st.subheader("Indefinite Integral")
-            integral = sp.integrate(expr, x)
-            st.latex(f"\\int ({sp.latex(expr)}) \\, dx = {sp.latex(integral)} + C")
+    if user_input:
+        try:
+            # Define the symbol x
+            x = sp.symbols('x')
+        
+            # Convert text into a SymPy object
+            # 'locals' helps if the user accidentally uses a different variable
+            expr = sp.sympify(user_input, locals={'x': x})
+        
+            st.write("---")
+        
+            # DERIVATIVE
+            deriv = sp.diff(expr, x)
+            st.subheader("The Derivative ($f'(x)$)")
+            st.latex(r"f'(x) = " + sp.latex(deriv))
+        
+            # INTEGRAL
+            integ = sp.integrate(expr, x)
+            st.subheader("The Integral ($\int f(x) dx$)")
+            st.latex(r"\int f(x) \, dx = " + sp.latex(integ) + r" + C")
+        
+        except Exception as e:
+            st.error(f"Math Error: Could not parse '{user_input}'. Check your syntax!")
 
-    except Exception as e:
-        st.error("Please enter a valid mathematical expression (use * for multiplication).")
 
 
 
