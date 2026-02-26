@@ -6,7 +6,7 @@ import math
 st.set_page_config(page_title="Linear Equation Solver", page_icon="📈")
 st.title("🧮 Linear Equation Solver")
 
-mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry"])
+mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry", "Quadratics"])
 
 if mode == "Single Equation":
     st.header("Solve $ax + b = c$")
@@ -59,7 +59,7 @@ elif mode == "Simultaneous":
         else:
             st.warning("Lines are parallel (no solution).")
 elif mode == "Trigonometry":
-    st.header("Solve trigonometirc functions")
+    st.header("Solve trigonometric functions")
     trigfunc = st.selectbox("Choose function", ["sine", "cosine", "tangent", "inverse sine", "inverse cosine", "inverse tangent"])
     value = st.number_input("Value for function", value = 0.0, key = "value")
     if trigfunc == "sine":
@@ -91,5 +91,15 @@ elif mode == "Trigonometry":
         trigresult_rad = math.atan(value)
         trigresult_deg = math.degrees(trigresult_rad)
         st.success(f"Result: $\\arctan({value}) = {round(trigresult_deg, 4)}^\circ$")
+
+
+elif mode == "Quadratics":
+    st.header("Solve Quadratic Equations in $ax^2 + bx + c = 0$")
+    a = st.number_input("Value for a", value = 0.0)
+    b = st.number_input("Value for b", value = 0.0)
+    c = st.number_input("Value for b", value = 1.0)
+    solution1 = (-b + sqrt(b^2 -4*a*c))/(2*a)
+    solution2 = (-b - sqrt(b^2 -4*a*c))/(2*a)
+    st.success(f"Results are {solution1} and {solution2}")
 
 
