@@ -71,6 +71,13 @@ elif mode == "Trigonometry":
     elif trigfunc == "tangent":
         trigresult = math.tan(math.radians(value))
         st.success(f"Result: $x = {round(trigresult, 4)}$")
-
-
+    elif trigfunc == "inverse sine":
+        trigresult = math.asin(math.radians(value))
+        st.success(f"Result: $x = {round(trigresult, 4)}$")
+    elif trigfunc == "inverse cosine":
+        trigresult = math.acos(math.radians(value))
+        st.success(f"Result: $x = {round(trigresult, 4)}$")
+    elif trigfunc == "inverse tangent":
+        trigresult = math.atan(math.radians(value))
+        st.success(f"Result: $x = {round(trigresult, 4)}$")
 
