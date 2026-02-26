@@ -129,11 +129,8 @@ if mode == "Calculus":
 
     if user_input:
         try:
-            # Define the symbol x
             x = sp.symbols('x')
         
-            # Convert text into a SymPy object
-            # 'locals' helps if the user accidentally uses a different variable
             expr = sp.sympify(user_input, locals={'x': x})
         
             st.write("---")
@@ -147,9 +144,22 @@ if mode == "Calculus":
             integ = sp.integrate(expr, x)
             st.subheader("The Integral ($\int f(x) dx$)")
             st.latex(r"\int f(x) \, dx = " + sp.latex(integ) + r" + C")
+            t.write("---")
+            st.subheader("Definite Integral (Area under Curve)")
+
+            col_a, col_b = st.columns(2)
+            with col_a:
+                lower_limit = st.number_input("Lower limit (a)", value=0.0)
+            with col_b:
+                upper_limit = st.number_input("Upper limit (b)", value=1.0)
+
+            if st.button("Calculate Area"):
+                area = sp.integrate(expr, (x, lower_limit, upper_limit))
+                st.latex(rf"\int_{{{lower_limit}}}^{{{upper_limit}}} ({sp.latex(expr)}) \, dx = {sp.latex(area)} \approx {float(area):.4f}")
         
         except Exception as e:
             st.error(f"Math Error: Could not parse '{user_input}'. Check your syntax!")
+
 
 
 
