@@ -11,7 +11,7 @@ st.set_page_config(layout="wide")
 st.set_page_config(page_title="Linear Equation Solver", page_icon="📈")
 st.title("Math Solver")
 
-mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry", "Quadratics", "Calculus", "Statistics"])
+mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry", "Quadratics", "Calculus", "Statistics", "Unit Conversion])
 
 if mode == "Single Equation":
     st.header("Solve $ax + b = c$")
@@ -186,21 +186,64 @@ elif mode == "Statistics":
 
         except ValueError:
                     st.error("Check your input! Make sure you only use numbers and commas.")
+elif mode == "Unit Conversion":
+    st.header("Unit Conversions")
+    unit = st.selectbox("Select Category", ["Length", "Weight", "Temperature"])
 
+    if unit == "Length":
+        length_units = {
+            "Meters": 1.0, "Kilometers": 1000.0, "Centimeters": 0.01,
+            "Millimeters": 0.001, "Miles": 1609.34, "Yards": 0.9144,
+            "Feet": 0.3048, "Inches": 0.0254
+        }
+        col1, col2 = st.columns(2)
+        with col1:
+            from_unit = st.selectbox("From:", list(length_units.keys()))
+            input_value = st.number_input("Enter Value:", value=1.0, key="len_in")
+        with col2:
+            to_unit = st.selectbox("To:", list(length_units.keys()))
+        
+        if st.button("Convert", key="btn_len"):
+            result = (input_value * length_units[from_unit]) / length_units[to_unit]
+            st.success(f"### {input_value} {from_unit} = {result:.4f} {to_unit}")
 
+    elif unit == "Weight":
+        weight_units = {
+            "Kilograms": 1000.0, "Grams": 1.0, "Metric Ton": 1000000.0,
+            "Dram": 1.772, "Ounce": 28.35, "Pound": 453.59,
+            "Stone": 6350.29, "Troy Ounce": 31.10, "Tola": 11.66
+        }
+        col1, col2 = st.columns(2)
+        with col1:
+            from_unit = st.selectbox("From:", list(weight_units.keys()))
+            input_value = st.number_input("Enter value", value=1.0, key="wt_in")
+        with col2:
+            to_unit = st.selectbox("To:", list(weight_units.keys())) 
+        if st.button("Convert", key="btn_wt"):
+            result = (input_value * weight_units[from_unit]) / weight_units[to_unit]
+            st.success(f"### {input_value} {from_unit} = {result:.4f} {to_unit}")
 
+    elif unit == "Temperature":
+        temp_options = ["Celsius", "Fahrenheit", "Kelvin"]
+        col1, col2 = st.columns(2)
+        with col1:
+            from_unit = st.selectbox("From:", temp_options)
+            input_value = st.number_input("Enter value", value=0.0, key="temp_in")
+        with col2:
+            to_unit = st.selectbox("To:", temp_options)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        if st.button("Convert", key="btn_temp"):
+            if from_unit == "Celsius":
+                celsius = input_value
+            elif from_unit == "Fahrenheit":
+                celsius = (input_value - 32) * 5/9
+            else: # Kelvin
+                celsius = input_value - 273.15
+            if to_unit == "Celsius":
+                result = celsius
+            elif to_unit == "Fahrenheit":
+                result = (celsius * 9/5) + 32
+            else: # Kelvin
+                result = celsius + 273.15
+            
+            st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
