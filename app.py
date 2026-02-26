@@ -94,7 +94,7 @@ elif mode == "Trigonometry":
 
 elif mode == "Quadratics":
     st.header("Solve $ax^2 + bx + c = 0$")
-    a = st.number_input("Value for a", value=1.0, key="quad_a") 
+    a = st.number_input("Value for a", value=0.0, key="quad_a") 
     b = st.number_input("Value for b", value=0.0, key="quad_b")
     c = st.number_input("Value for c", value=0.0, key="quad_c")
 
@@ -114,6 +114,7 @@ elif mode == "Quadratics":
                 st.success(f"There is one repeated root: $x = {round(sol1, 4)}$")
             else:
                 st.success(f"The roots are: $x_1 = {round(sol1, 4)}$ and $x_2 = {round(sol2, 4)}$")
+
 
 
 
