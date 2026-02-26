@@ -11,7 +11,7 @@ st.set_page_config(layout="wide")
 st.set_page_config(page_title="Linear Equation Solver", page_icon="📈")
 st.title("Math Solver")
 
-mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry", "Quadratics", "Calculus", "Statistics", "Unit Conversion])
+mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry", "Quadratics", "Calculus", "Statistics", "Unit Conversion"])
 
 if mode == "Single Equation":
     st.header("Solve $ax + b = c$")
@@ -247,3 +247,4 @@ elif mode == "Unit Conversion":
                 result = celsius + 273.15
             
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
