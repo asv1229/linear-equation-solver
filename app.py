@@ -61,22 +61,23 @@ elif mode == "Trigonometry":
     st.header("Solve trigonometric functions")
     trigfunc = st.selectbox("Choose function", ["sine", "cosine", "tangent", "inverse sine", "inverse cosine", "inverse tangent"])
     value = st.number_input("Value for function", value = 0.0, key = "value")
-    if trigfunc == "sine":
-        trigresult = math.sin(math.radians(value))
-        st.success(f"Result: $x = {round(trigresult, 4)}$")
-    elif trigfunc == "cosine":
-        trigresult = math.cos(math.radians(value))
-        st.success(f"Result: $x = {round(trigresult, 4)}$")
-    elif trigfunc == "tangent":
-        trigresult = math.tan(math.radians(value))
-        st.success(f"Result: $x = {round(trigresult, 4)}$")
-    elif trigfunc == "inverse sine":
-        if -1 <= value <= 1:
-            trigresult_rad = math.asin(value)
-            trigresult_deg = math.degrees(trigresult_rad)
-            st.success(f"Result: $\\arcsin({value}) = {round(trigresult_deg, 4)}^\circ$")
-        else:
-            st.error("Input for Inverse Sine must be between -1 and 1")
+    if st.button("Solve", key="btn_trig"):
+        if trigfunc == "sine":
+            trigresult = math.sin(math.radians(value))
+            st.success(f"Result: $x = {round(trigresult, 4)}$")
+        elif trigfunc == "cosine":
+            trigresult = math.cos(math.radians(value))
+            st.success(f"Result: $x = {round(trigresult, 4)}$")
+        elif trigfunc == "tangent":
+            trigresult = math.tan(math.radians(value))
+            st.success(f"Result: $x = {round(trigresult, 4)}$")
+        elif trigfunc == "inverse sine":
+            if -1 <= value <= 1:
+                trigresult_rad = math.asin(value)
+                trigresult_deg = math.degrees(trigresult_rad)
+                st.success(f"Result: $\\arcsin({value}) = {round(trigresult_deg, 4)}^\circ$")
+            else:
+                st.error("Input for Inverse Sine must be between -1 and 1")
 
     elif trigfunc == "inverse cosine":
         if -1 <= value <= 1:
@@ -114,6 +115,7 @@ elif mode == "Quadratics":
                 st.success(f"There is one repeated root: $x = {round(sol1, 4)}$")
             else:
                 st.success(f"The roots are: $x_1 = {round(sol1, 4)}$ and $x_2 = {round(sol2, 4)}$")
+
 
 
 
