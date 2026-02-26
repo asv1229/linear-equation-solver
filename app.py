@@ -184,8 +184,9 @@ elif mode == "Statistics":
                 else:
                     st.warning("Please enter at least one number.")
 
-            except ValueError:
-                st.error("Check your input! Make sure you only use numbers and commas.")
+                except ValueError:
+                    st.error("Check your input! Make sure you only use numbers and commas.")
+
 
 
 
