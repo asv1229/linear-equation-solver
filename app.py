@@ -103,8 +103,9 @@ elif mode == "Quadratics":
     else:
         solution1 = (-b + (b**2 -4*a*c)**0.5)/(2*a)
         solution2 = (-b - (b**2 -4*a*c)**0.5)/(2*a)
-        st.success(f"Results are {solution1} and {solution2}")
+        st.success(f"Results are {round(solution1, 4)} and {round(solution2, 4)}")
         
+
 
 
 
