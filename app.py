@@ -1,11 +1,12 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
 st.set_page_config(page_title="Linear Equation Solver", page_icon="📈")
 st.title("🧮 Linear Equation Solver")
 
-mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous"])
+mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry"])
 
 if mode == "Single Equation":
     st.header("Solve $ax + b = c$")
@@ -21,7 +22,7 @@ if mode == "Single Equation":
             x = (c - b) / a
             st.success(f"Result: $x = {round(x, 4)}$")
 
-else:
+elif mode == "Simultaneous":
     st.header("Solve $ax + by = c$ and $dx + ey = f$")
     col1, col2 = st.columns(2)
     with col1:
@@ -33,8 +34,6 @@ else:
         e = st.number_input("e", value=-1.0, key="e2")
         f = st.number_input("f", value=1.0, key="f2")
 
-    # The Solve System button MUST be inside this 'else' block
-    # so that 'e' is defined before it is used!
     if st.button("Solve System", key="btn_sim"):
         D = (a * e) - (b * d)
         if D != 0:
@@ -59,3 +58,17 @@ else:
             st.pyplot(fig)
         else:
             st.warning("Lines are parallel (no solution).")
+elif mode == "Trigonometry":
+    st.header("Solve trigonometirc functions")
+    trigfunc = st.selectbox("Choose function", ["sine", "cosine", "tangent", "inverse sine", "inverse cosine", "inverse tangent"])
+    value = st.number_input("Value for function", value = 0.0, key = "value")
+    if trigfunc == "sine":
+        trigresult = math.sin(math.radians(value))
+        st.success(f"Result: $x = {round(x, 4)}$")
+    elif trigfunc == "cosine":
+        trigresult = math.cos(math.radians(value))
+        st.success(f"Result: $x = {round(x, 4)}$")
+    elif trigfunc == "tangent":
+        trigresult = math.tan(math.radians(value))
+        st.success(f"Result: $x = {round(x, 4)}$")
+
