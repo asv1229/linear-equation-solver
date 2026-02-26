@@ -69,13 +69,10 @@ elif mode == "Trigonometry":
     if st.button("Solve", key="btn_trig"):
         if trigfunc == "sine":
             trigresult = math.sin(math.radians(value))
-            st.success(f"Result: $x = {round(trigresult, 4)}$")
         elif trigfunc == "cosine":
             trigresult = math.cos(math.radians(value))
-            st.success(f"Result: $x = {round(trigresult, 4)}$")
         elif trigfunc == "tangent":
             trigresult = math.tan(math.radians(value))
-            st.success(f"Result: $x = {round(trigresult, 4)}$")
         elif trigfunc == "inverse sine":
             if -1 <= value <= 1:
                 trigresult_rad = math.asin(value)
@@ -93,7 +90,7 @@ elif mode == "Trigonometry":
         elif trigfunc == "inverse tangent":
             trigresult_rad = math.atan(value)
             trigresult_deg = math.degrees(trigresult_rad)
-        st.success(f"Result: $\\arctan({value}) = {round(trigresult_deg, 4)}^\circ$")
+        st.success(f"Result: ${round(trigresult_deg, 4)}^\circ$")
 
 
 elif mode == "Quadratics":
@@ -245,6 +242,7 @@ elif mode == "Unit Conversion":
                 result = celsius + 273.15
             
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
 
