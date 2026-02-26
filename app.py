@@ -93,7 +93,7 @@ elif mode == "Trigonometry":
         if trigfunc == "sine" or "cosine" or "tangent":
             st.success(f"Result: ${round(trigresult, 4)}^\circ$")
         else:
-             st.success(f"Result: ${round(trigresult_deg, 4)}^\circ$")
+            st.success(f"Result: ${round(trigresult_deg, 4)}^\circ$")
        
         
 
@@ -247,6 +247,7 @@ elif mode == "Unit Conversion":
                 result = celsius + 273.15
             
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
 
