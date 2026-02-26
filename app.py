@@ -2,11 +2,12 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+import sympy as sp
 
 st.set_page_config(page_title="Linear Equation Solver", page_icon="📈")
 st.title("Math Solver")
 
-mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry", "Quadratics"])
+mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry", "Quadratics", "Calculus"])
 
 if mode == "Single Equation":
     st.header("Solve $ax + b = c$")
@@ -115,6 +116,32 @@ elif mode == "Quadratics":
                 st.success(f"There is one repeated root: $x = {round(sol1, 4)}$")
             else:
                 st.success(f"The roots are: $x_1 = {round(sol1, 4)}$ and $x_2 = {round(sol2, 4)}$")
+
+
+
+if mode == "Calculus":
+    x = sp.Symbol('x')
+
+    st.header("Calculus Solver")
+    user_input = st.text_input("Enter a function of x", value="x**2 + 3*x + 2")
+
+    try:
+        expr = sp.sympify(user_input)
+    
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.subheader("Derivative")
+            derivative = sp.diff(expr, x)
+            st.latex(f"\\frac{{d}}{{dx}}({sp.latex(expr)}) = {sp.latex(derivative)}")
+
+        with col2:
+            st.subheader("Indefinite Integral")
+            integral = sp.integrate(expr, x)
+            st.latex(f"\\int ({sp.latex(expr)}) \\, dx = {sp.latex(integral)} + C")
+
+    except Exception as e:
+        st.error("Please enter a valid mathematical expression (use * for multiplication).")
 
 
 
