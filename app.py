@@ -90,7 +90,7 @@ elif mode == "Trigonometry":
         elif trigfunc == "inverse tangent":
             trigresult_rad = math.atan(value)
             trigresult_deg = math.degrees(trigresult_rad)
-        if trig_func == "sine" or "cosine" or "tangent":
+        if trigfunc == "sine" or "cosine" or "tangent":
             st.success(f"Result: ${round(trigresult_rad, 4)}^\circ$")
         else:
              st.success(f"Result: ${round(trigresult_deg, 4)}^\circ$")
@@ -247,6 +247,7 @@ elif mode == "Unit Conversion":
                 result = celsius + 273.15
             
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
 
