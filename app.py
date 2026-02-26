@@ -160,7 +160,7 @@ elif mode == "Statistics":
         try:
             data_list = [float(x.strip()) for x in raw_data.split(",") if x.strip()]
 
-            if st.button("Sort", key = btn_stats):
+            if st.button("Sort", key = "btn_stats"):
                 if len(data_list) > 0:
                     mean_val = np.mean(data_list)
                     median_val = np.median(data_list)
@@ -184,8 +184,9 @@ elif mode == "Statistics":
                 else:
                     st.warning("Please enter at least one number.")
 
-                except ValueError:
+        except ValueError:
                     st.error("Check your input! Make sure you only use numbers and commas.")
+
 
 
 
