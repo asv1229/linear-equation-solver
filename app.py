@@ -103,7 +103,8 @@ elif mode == "Quadratics":
     if a == 0:
         st.warning("Impossible: a is equal to 0. Please retry in the linear equation solving tab.")
     else:
-    st.success(f"Results are {solution1} and {solution2}")
+        st.success(f"Results are {solution1} and {solution2}")
+
 
 
 
