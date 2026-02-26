@@ -64,11 +64,12 @@ elif mode == "Trigonometry":
     value = st.number_input("Value for function", value = 0.0, key = "value")
     if trigfunc == "sine":
         trigresult = math.sin(math.radians(value))
-        st.success(f"Result: $x = {round(x, 4)}$")
+        st.success(f"Result: $x = {round(value, 4)}$")
     elif trigfunc == "cosine":
         trigresult = math.cos(math.radians(value))
-        st.success(f"Result: $x = {round(x, 4)}$")
+        st.success(f"Result: $x = {round(value, 4)}$")
     elif trigfunc == "tangent":
         trigresult = math.tan(math.radians(value))
-        st.success(f"Result: $x = {round(x, 4)}$")
+        st.success(f"Result: $x = {round(value, 4)}$")
+
 
