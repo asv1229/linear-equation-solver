@@ -159,33 +159,34 @@ elif mode == "Statistics":
     if raw_data:
         try:
             data_list = [float(x.strip()) for x in raw_data.split(",") if x.strip()]
-            
-            if len(data_list) > 0:
-                mean_val = np.mean(data_list)
-                median_val = np.median(data_list)
-                std_val = np.std(data_list)
-                min_val = np.min(data_list)
-                max_val = np.max(data_list)
+
+            if st.button("Sort", key = btn_stats):
+                if len(data_list) > 0:
+                    mean_val = np.mean(data_list)
+                    median_val = np.median(data_list)
+                    std_val = np.std(data_list)
+                    min_val = np.min(data_list)
+                    max_val = np.max(data_list)
                 
-                col1, col2, col3 = st.columns(3)
-                col1.metric("Mean (Average)", f"{mean_val:.2f}")
-                col2.metric("Median", f"{median_val:.2f}")
-                col3.metric("Std. Deviation", f"{std_val:.2f}")
+                    col1, col2, col3 = st.columns(3)
+                    col1.metric("Mean (Average)", f"{mean_val:.2f}")
+                    col2.metric("Median", f"{median_val:.2f}")
+                    col3.metric("Std. Deviation", f"{std_val:.2f}")
 
-                col4, col5, col6 = st.columns(3)
-                col4.metric("Minimum", f"{min_val}")
-                col5.metric("Maximum", f"{max_val}")
-                col6.metric("Total Count", len(data_list))
+                    col4, col5, col6 = st.columns(3)
+                    col4.metric("Minimum", f"{min_val}")
+                    col5.metric("Maximum", f"{max_val}")
+                    col6.metric("Total Count", len(data_list))
 
-                st.subheader("Data Distribution")
-                chart_data = pd.DataFrame(data_list, columns=['Value'])
-                st.bar_chart(chart_data['Value'].value_counts().sort_index())
+                    st.subheader("Data Distribution")
+                    chart_data = pd.DataFrame(data_list, columns=['Value'])
+                    st.bar_chart(chart_data['Value'].value_counts().sort_index())
+                else:
+                    st.warning("Please enter at least one number.")
 
-            else:
-                st.warning("Please enter at least one number.")
+            except ValueError:
+                st.error("Check your input! Make sure you only use numbers and commas.")
 
-        except ValueError:
-            st.error("Check your input! Make sure you only use numbers and commas.")
 
 
 
