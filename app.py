@@ -10,7 +10,7 @@ mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "
 
 if mode == "Single Equation":
     st.header("Solve $ax + b = c$")
-    a = st.number_input("Value for a", value=1.0, key="a1")
+    a = st.number_input("Value for a", value=0.0, key="a1")
     b = st.number_input("Value for b", value=0.0, key="b1")
     c = st.number_input("Value for c", value=0.0, key="c1")
     
@@ -26,13 +26,13 @@ elif mode == "Simultaneous":
     st.header("Solve $ax + by = c$ and $dx + ey = f$")
     col1, col2 = st.columns(2)
     with col1:
-        a = st.number_input("a", value=1.0, key="a2")
-        b = st.number_input("b", value=1.0, key="b2")
+        a = st.number_input("a", value=0.0, key="a2")
+        b = st.number_input("b", value=0.0, key="b2")
         c = st.number_input("c", value=1.0, key="c2")
     with col2:
-        d = st.number_input("d", value=1.0, key="d2")
-        e = st.number_input("e", value=-1.0, key="e2")
-        f = st.number_input("f", value=1.0, key="f2")
+        d = st.number_input("d", value=0.0, key="d2")
+        e = st.number_input("e", value=0.0, key="e2")
+        f = st.number_input("f", value=0.0, key="f2")
 
     if st.button("Solve System", key="btn_sim"):
         D = (a * e) - (b * d)
@@ -91,4 +91,5 @@ elif mode == "Trigonometry":
         trigresult_rad = math.atan(value)
         trigresult_deg = math.degrees(trigresult_rad)
         st.success(f"Result: $\\arctan({value}) = {round(trigresult_deg, 4)}^\circ$")
+
 
