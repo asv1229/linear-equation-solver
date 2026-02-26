@@ -72,12 +72,23 @@ elif mode == "Trigonometry":
         trigresult = math.tan(math.radians(value))
         st.success(f"Result: $x = {round(trigresult, 4)}$")
     elif trigfunc == "inverse sine":
-        trigresult = math.asin(math.radians(value))
-        st.success(f"Result: $x = {round(trigresult, 4)}$")
+        if -1 <= value <= 1:
+            trigresult_rad = math.asin(value)
+            trigresult_deg = math.degrees(trigresult_rad)
+            st.success(f"Result: $\\arcsin({value}) = {round(trigresult_deg, 4)}^\circ$")
+        else:
+            st.error("Input for Inverse Sine must be between -1 and 1")
+
     elif trigfunc == "inverse cosine":
-        trigresult = math.acos(math.radians(value))
-        st.success(f"Result: $x = {round(trigresult, 4)}$")
+        if -1 <= value <= 1:
+            trigresult_rad = math.acos(value)
+            trigresult_deg = math.degrees(trigresult_rad)
+            st.success(f"Result: $\\arccos({value}) = {round(trigresult_deg, 4)}^\circ$")
+        else:
+            st.error("Input for Inverse Cosine must be between -1 and 1")
+
     elif trigfunc == "inverse tangent":
-        trigresult = math.atan(math.radians(value))
-        st.success(f"Result: $x = {round(trigresult, 4)}$")
+        trigresult_rad = math.atan(value)
+        trigresult_deg = math.degrees(trigresult_rad)
+        st.success(f"Result: $\\arctan({value}) = {round(trigresult_deg, 4)}^\circ$")
 
