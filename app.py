@@ -193,7 +193,7 @@ elif mode == "Statistics":
                     st.error("Check your input! Make sure you only use numbers and commas.")
 elif mode == "Unit Conversion":
     st.header("Unit Conversions")
-    unit = st.selectbox("Select Category", ["Length", "Weight", "Temperature"])
+    unit = st.selectbox("Select Category", ["Length", "Weight", "Temperature", "Data"])
 
     if unit == "Length":
         length_units = {
@@ -253,11 +253,26 @@ elif mode == "Unit Conversion":
             
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
 
-
-
-
-
-
-
-
-
+    elif unit == "Data":
+        data_units = {
+            "Megabyte":1.0
+            "Bit": 0.000000125
+            "Nibble": 0.0000005
+            "Byte": 0.000001
+            "Kilobyte": 0.001
+            "Gigabyte": 1000
+            "Terabyte": 1000000
+            "Petabyte": 1000000000
+            "Exabyte": 1000000000000
+            "Zettabyte":1000000000000
+            "Yottabyte": 1000000000000000000
+        }
+            
+        col1, col2 = st.columns(2)
+        with col1:
+            from_unit = st.selectbox("From:", list(data_units.keys()))
+            input_value = st.number_input("Enter value", value = 1.0, key="data_in")
+        with col2:
+            to_unit = st.selectbox("To:", list(data_units.keys()))
+        if st.button("Convert", key="btn_data"):
+            result = (input_value *weight_units[from_unit]) / weight_units[to_unit]
