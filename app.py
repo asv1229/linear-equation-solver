@@ -94,20 +94,27 @@ elif mode == "Trigonometry":
 
 
 elif mode == "Quadratics":
-    st.header("Solve Quadratic Equations in $ax^2 + bx + c = 0$")
-    a = st.number_input("Value for a", value = 0.0)
-    b = st.number_input("Value for b", value = 0.0)
-    c = st.number_input("Value for b", value = 1.0)
+    st.header("Solve $ax^2 + bx + c = 0$")
+    a = st.number_input("Value for a", value=1.0, key="quad_a") 
+    b = st.number_input("Value for b", value=0.0, key="quad_b")
+    c = st.number_input("Value for c", value=0.0, key="quad_c")
+
     if a == 0:
-        st.warning("Impossible: a is equal to 0. Please retry in the linear equation solving tab.")
+        st.warning("If $a=0$, this is a linear equation, not a quadratic!")
     else:
-        solution1 = (-b + (b**2 -4*a*c)**0.5)/(2*a)
-        solution2 = (-b - (b**2 -4*a*c)**0.5)/(2*a)
-        st.success(f"Results are {round(solution1, 4)} and {round(solution2, 4)}")
+        discriminant = b**2 - 4*a*c
         
-
-
-
+        if discriminant < 0:
+            st.error("No real solutions (the roots are imaginary).")
+        else:
+            sqrt_disc = discriminant**0.5
+            sol1 = (-b + sqrt_disc) / (2*a)
+            sol2 = (-b - sqrt_disc) / (2*a)
+            
+            if discriminant == 0:
+                st.success(f"There is one repeated root: $x = {round(sol1, 4)}$")
+            else:
+                st.success(f"The roots are: $x_1 = {round(sol1, 4)}$ and $x_2 = {round(sol2, 4)}$")
 
 
 
