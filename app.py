@@ -4,6 +4,8 @@ import numpy as np
 import math
 import sympy as sp
 
+
+st.set_page_config(layout="wide")
 st.set_page_config(page_title="Linear Equation Solver", page_icon="📈")
 st.title("Math Solver")
 
@@ -142,6 +144,7 @@ if mode == "Calculus":
             st.latex(r"\int f(x) \, dx = " + sp.latex(integ) + r" + C")
         except Exception as e:
             st.error(f"Math Error: Could not parse '{user_input}'. Check your syntax!")
+
 
 
 
