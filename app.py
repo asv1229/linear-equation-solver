@@ -103,27 +103,36 @@ elif mode == "Trigonometry":
 
 elif mode == "Quadratics":
     st.header("Solve $ax^2 + bx + c = 0$")
-    a = st.number_input("Value for a", value=0.0, key="quad_a") 
+    a = st.number_input("Value for a", value=1.0, key="quad_a") 
     b = st.number_input("Value for b", value=0.0, key="quad_b")
     c = st.number_input("Value for c", value=0.0, key="quad_c")
 
     if st.button("Solve", key="btn_quadratic"):
         if a == 0:
-            st.warning("If $a=0$, this is a linear equation, not a quadratic!")
+            st.warning("If $a=0$, this is a linear equation. $x = {-c/b if b != 0 else 'Undefined'}$")
         else:
             discriminant = b**2 - 4*a*c
             
-            if discriminant < 0:
-                st.error("No real solutions (the roots are imaginary).")
-            else:
+            if discriminant >= 0:
                 sqrt_disc = discriminant**0.5
                 sol1 = (-b + sqrt_disc) / (2*a)
                 sol2 = (-b - sqrt_disc) / (2*a)
                 
                 if discriminant == 0:
-                    st.success(f"There is one repeated root: $x = {round(sol1, 4)}$")
+                    st.success(f"One repeated real root: $x = {round(sol1, 4)}$")
                 else:
-                    st.success(f"The roots are: $x_1 = {round(sol1, 4)}$ and $x_2 = {round(sol2, 4)}$")
+                    st.success(f"Two real roots: $x_1 = {round(sol1, 4)}$ and $x_2 = {round(sol2, 4)}$")
+            
+            else:
+                real_part = -b / (2*a)
+                imag_part = (abs(discriminant)**0.5) / (2*a)
+                
+                sol1 = f"{round(real_part, 4)} + {round(imag_part, 4)}i"
+                sol2 = f"{round(real_part, 4)} - {round(imag_part, 4)}i"
+                
+                st.info("The roots are complex (imaginary):")
+                st.success(f"$x_1 = {sol1}$")
+                st.success(f"$x_2 = {sol2}$")
 
 
 
@@ -276,6 +285,7 @@ elif mode == "Unit Conversion":
         if st.button("Convert", key="btn_data"):
             result = (input_value * data_units[from_unit]) / data_units[to_unit]
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
 
