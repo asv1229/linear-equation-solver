@@ -109,37 +109,29 @@ elif mode == "Quadratics":
 
     if st.button("Solve", key="btn_quadratic"):
         if a == 0:
-            if b != 0:
-                st.warning(f"Linear Equation detected: $x = {-c/b}$")
-            else:
-                st.error("Invalid equation (0 = 0 or c = 0)")
+            st.warning("This is a linear equation. $x = " + str(-c/b if b != 0 else 'Undefined') + "$")
         else:
-            sol1, sol2 = "", ""
             discriminant = b**2 - 4*a*c
-
+            
             if discriminant >= 0:
                 sqrt_disc = discriminant**0.5
-                r1 = (-b + sqrt_disc) / (2*a)
-                r2 = (-b - sqrt_disc) / (2*a)
-                sol1, sol2 = str(round(r1, 4)), str(round(r2, 4))
+                sol1 = round((-b + sqrt_disc) / (2*a), 4)
+                sol2 = round((-b - sqrt_disc) / (2*a), 4)
                 
                 if discriminant == 0:
-                    st.success(f"One repeated real root: $x = {sol1}$")
+                    st.success(f"There is one repeated root: $x = {sol1}$")
                 else:
-                    st.success(f"Two real roots: $x_1 = {sol1}$ and $x_2 = {sol2}$")
+                    st.success(f"The roots are: $x_1 = {sol1}$ and $x_2 = {sol2}$")
             
             else:
                 real_part = round(-b / (2*a), 4)
                 imag_part = round((abs(discriminant)**0.5) / (2*a), 4)
-                sol1 = f"{real_part} + {imag_part}i"
-                sol2 = f"{real_part} - {imag_part}i"
+                sol1_str = f"{real_part} + {imag_part}i"
+                sol2_str = f"{real_part} - {imag_part}i"
                 
                 st.info("The roots are complex (imaginary):")
-                st.success(f"$x_1 = {sol1}$")
-                st.success(f"$x_2 = {sol2}$")
-
-            st.write(f"**Discriminant ($\Delta$):** {discriminant}")
-
+                st.success(f"$x_1 = {sol1_str}$")
+                st.success(f"$x_2 = {sol2_str}$")
 
 
 elif mode == "Calculus":
@@ -291,6 +283,7 @@ elif mode == "Unit Conversion":
         if st.button("Convert", key="btn_data"):
             result = (input_value * data_units[from_unit]) / data_units[to_unit]
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
 
