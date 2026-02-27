@@ -68,7 +68,6 @@ elif mode == "Trigonometry":
     value = st.number_input("Value (Degrees for sin/cos/tan, Ratio for inverse)", value = 0.0, key = "value")
     
     if st.button("Solve", key="btn_trig"):
-        # 1. Standard Trig
         if trigfunc == "sine":
             result = math.sin(math.radians(value))
             st.success(f"Result: {round(result, 4)}")
@@ -81,7 +80,6 @@ elif mode == "Trigonometry":
             result = math.tan(math.radians(value))
             st.success(f"Result: {round(result, 4)}")
 
-        # 2. Inverse Trig (Outputting Degrees)
         elif trigfunc == "inverse sine":
             if -1 <= value <= 1:
                 result_deg = math.degrees(math.asin(value))
@@ -109,21 +107,23 @@ elif mode == "Quadratics":
     b = st.number_input("Value for b", value=0.0, key="quad_b")
     c = st.number_input("Value for c", value=0.0, key="quad_c")
 
-    if a == 0:
-        st.warning("If $a=0$, this is a linear equation, not a quadratic!")
-    else:
-        discriminant = b**2 - 4*a*c
     if st.button("Solve", key="btn_quadratic"):
-        if discriminant < 0:
-            st.error("No real solutions (the roots are imaginary).")
+        if a == 0:
+            st.warning("If $a=0$, this is a linear equation, not a quadratic!")
         else:
-            sqrt_disc = discriminant**0.5
-            sol1 = (-b + sqrt_disc) / (2*a)
-            sol2 = (-b - sqrt_disc) / (2*a)
-            if discriminant == 0:
-                st.success(f"There is one repeated root: $x = {round(sol1, 4)}$")
+            discriminant = b**2 - 4*a*c
+            
+            if discriminant < 0:
+                st.error("No real solutions (the roots are imaginary).")
             else:
-                st.success(f"The roots are: $x_1 = {round(sol1, 4)}$ and $x_2 = {round(sol2, 4)}$")
+                sqrt_disc = discriminant**0.5
+                sol1 = (-b + sqrt_disc) / (2*a)
+                sol2 = (-b - sqrt_disc) / (2*a)
+                
+                if discriminant == 0:
+                    st.success(f"There is one repeated root: $x = {round(sol1, 4)}$")
+                else:
+                    st.success(f"The roots are: $x_1 = {round(sol1, 4)}$ and $x_2 = {round(sol2, 4)}$")
 
 
 
@@ -276,6 +276,7 @@ elif mode == "Unit Conversion":
         if st.button("Convert", key="btn_data"):
             result = (input_value * data_units[from_unit]) / data_units[to_unit]
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
 
