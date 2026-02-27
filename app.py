@@ -113,14 +113,13 @@ elif mode == "Quadratics":
         st.warning("If $a=0$, this is a linear equation, not a quadratic!")
     else:
         discriminant = b**2 - 4*a*c
-        
+    if st.button("Solve", key="btn_quadratic"):
         if discriminant < 0:
             st.error("No real solutions (the roots are imaginary).")
         else:
             sqrt_disc = discriminant**0.5
             sol1 = (-b + sqrt_disc) / (2*a)
             sol2 = (-b - sqrt_disc) / (2*a)
-        if st.button("Solve", key="btn_quadratic"):
             if discriminant == 0:
                 st.success(f"There is one repeated root: $x = {round(sol1, 4)}$")
             else:
@@ -277,5 +276,6 @@ elif mode == "Unit Conversion":
         if st.button("Convert", key="btn_data"):
             result = (input_value * data_units[from_unit]) / data_units[to_unit]
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
