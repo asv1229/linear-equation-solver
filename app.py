@@ -106,33 +106,33 @@ elif mode == "Quadratics":
     a = st.number_input("Value for a", value=1.0, key="quad_a") 
     b = st.number_input("Value for b", value=0.0, key="quad_b")
     c = st.number_input("Value for c", value=0.0, key="quad_c")
+    sol1 = None
+    sol2 = None
 
     if st.button("Solve", key="btn_quadratic"):
         if a == 0:
-            st.warning("This is a linear equation. $x = " + str(-c/b if b != 0 else 'Undefined') + "$")
+            st.warning(f"This is linear! $x = {-c/b if b != 0 else 'Undefined'}$")
         else:
             discriminant = b**2 - 4*a*c
             
-            if discriminant >= 0:
+            if discriminant < 0:
+                real_part = round(-b / (2*a), 4)
+                imag_part = round((abs(discriminant)**0.5) / (2*a), 4)
+                sol1 = f"{real_part} + {imag_part}i"
+                sol2 = f"{real_part} - {imag_part}i"
+                st.info("The roots are complex:")
+                st.success(f"$x_1 = {sol1}$")
+                st.success(f"$x_2 = {sol2}$")
+            
+            elif discriminant == 0:
+                sol1 = round(-b / (2*a), 4)
+                st.success(f"One repeated root: $x = {sol1}$")
+            
+            else:
                 sqrt_disc = discriminant**0.5
                 sol1 = round((-b + sqrt_disc) / (2*a), 4)
                 sol2 = round((-b - sqrt_disc) / (2*a), 4)
-                
-                if discriminant == 0:
-                    st.success(f"There is one repeated root: $x = {sol1}$")
-                else:
-                    st.success(f"The roots are: $x_1 = {sol1}$ and $x_2 = {sol2}$")
-            
-            else:
-                real_part = round(-b / (2*a), 4)
-                imag_part = round((abs(discriminant)**0.5) / (2*a), 4)
-                sol1_str = f"{real_part} + {imag_part}i"
-                sol2_str = f"{real_part} - {imag_part}i"
-                
-                st.info("The roots are complex (imaginary):")
-                st.success(f"$x_1 = {sol1_str}$")
-                st.success(f"$x_2 = {sol2_str}$")
-
+                st.success(f"The roots are: $x_1 = {sol1}$ and $x_2 = {sol2}$")
 
 elif mode == "Calculus":
     st.header("Calculus Solver")
@@ -283,6 +283,7 @@ elif mode == "Unit Conversion":
         if st.button("Convert", key="btn_data"):
             result = (input_value * data_units[from_unit]) / data_units[to_unit]
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
 
