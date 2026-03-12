@@ -26,53 +26,45 @@ if mode == "Single Equation":
             x = (c - b) / a
             st.success(f"Result: $x = {round(x, 4)}$")
 
-elif mode == "Simultaneous":
-    st.header("Solve $ax + by = c$ and $dx + ey = f$")
-    col1, col2 = st.columns(2)
-    with col1:
-        a = st.number_input("a", value=1.0, key="a2")
-        b = st.number_input("b", value=1.0, key="b2")
-        c = st.number_input("c", value=5.0, key="c2")
-    with col2:
-        d = st.number_input("d", value=1.0, key="d2")
-        e = st.number_input("e", value=-1.0, key="e2")
-        f = st.number_input("f", value=1.0, key="f2")
-
-    if st.button("Solve System", key="btn_sim"):
-        D = (a * e) - (b * d)
-        
-        if D != 0:
+if D != 0:
             x_res = ((c * e) - (b * f)) / D
             y_res = ((a * f) - (c * d)) / D
             st.success(f"Results: $x = {round(x_res, 4)}$, $y = {round(y_res, 4)}$")
 
-            fig, ax = plt.subplots(figsize=(6, 6))
+
+            fig, ax = plt.subplots(figsize=(8, 8))
             
-            limit = max(abs(x_res), abs(y_res), 5) + 5
+    
+            limit = max(abs(x_res), abs(y_res), 10) + 2
             x_vals = np.linspace(-limit, limit, 400)
 
-            def plot_line(coeff_a, coeff_b, const_c, label_text):
-                if coeff_b != 0:
-                    y_vals = (const_c - coeff_a * x_vals) / coeff_b
-                    ax.plot(x_vals, y_vals, label=label_text)
-                else:
-                    x_vert = const_c / coeff_a
-                    ax.axvline(x=x_vert, label=label_text)
+          
+            if b != 0:
+                y1 = (c - a * x_vals) / b
+                ax.plot(x_vals, y1, label=f'${a}x + {b}y = {c}$')
+            else:
+                ax.axvline(x=c/a, label=f'${a}x = {c}$', color='blue')
 
-            plot_line(a, b, c, f'{a}x + {b}y = {c}')
-            plot_line(d, e, f, f'{d}x + {e}y = {f}')
+            if e != 0:
+                y2 = (f - d * x_vals) / e
+                ax.plot(x_vals, y2, label=f'${d}x + {e}y = {f}$')
+            else:
+                ax.axvline(x=f/d, label=f'${d}x = {f}$', color='orange')
+
+        
             ax.axhline(0, color='black', linewidth=1.5) # X-axis
             ax.axvline(0, color='black', linewidth=1.5) # Y-axis
-            ax.grid(True, which='both', linestyle='--', alpha=0.5)
+            
             ax.set_xlim(-limit, limit)
             ax.set_ylim(-limit, limit)
-            ax.set_aspect('equal') 
             
-            ax.plot(x_res, y_res, 'ro', markersize=8, label='Intersection')
+     
+            ax.grid(True, linestyle='--', alpha=0.7)
+            ax.set_aspect('equal')
+            ax.plot(x_res, y_res, 'ro', markersize=10, label='Solution')
             ax.legend()
+            
             st.pyplot(fig)
-        else:
-            st.error("The lines are parallel or the same. No unique solution exists.")
 elif mode == "Trigonometry":
     st.header("Solve trigonometric functions")
     trigfunc = st.selectbox("Choose function", ["sine", "cosine", "tangent", "inverse sine", "inverse cosine", "inverse tangent"])
@@ -294,6 +286,7 @@ elif mode == "Unit Conversion":
         if st.button("Convert", key="btn_data"):
             result = (input_value * data_units[from_unit]) / data_units[to_unit]
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
 
