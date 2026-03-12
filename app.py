@@ -13,7 +13,7 @@ st.title("Math Solver")
 
 mode = st.sidebar.selectbox("Select Mode", ["Single Equation", "Simultaneous", "Trigonometry", "Quadratics", "Calculus", "Statistics", "Unit Conversion"])
 
-elif mode == "Simultaneous":
+if mode == "Simultaneous":
     st.header("Solve $ax + by = c$ and $dx + ey = f$")
     
     col1, col2 = st.columns(2)
@@ -294,6 +294,7 @@ elif mode == "Unit Conversion":
         if st.button("Convert", key="btn_data"):
             result = (input_value * data_units[from_unit]) / data_units[to_unit]
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
 
