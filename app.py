@@ -40,35 +40,39 @@ elif mode == "Simultaneous":
 
     if st.button("Solve System", key="btn_sim"):
         D = (a * e) - (b * d)
+        
         if D != 0:
             x_res = ((c * e) - (b * f)) / D
             y_res = ((a * f) - (c * d)) / D
             st.success(f"Results: $x = {round(x_res, 4)}$, $y = {round(y_res, 4)}$")
 
-            fig, ax = plt.subplots()
+            fig, ax = plt.subplots(figsize=(6, 6))
             
-            limit = max(abs(x_res), abs(y_res), 10) + 2
+            limit = max(abs(x_res), abs(y_res), 5) + 5
             x_vals = np.linspace(-limit, limit, 400)
-            
-            if b != 0:
-                y1 = (c - a * x_vals) / b
-                ax.plot(x_vals, y1, label=f'${a}x + {b}y = {c}$')
-            if e != 0:
-                y2 = (f - d * x_vals) / e
-                ax.plot(x_vals, y2, label=f'${d}x + {e}y = {f}$')
 
-            ax.plot(x_res, y_res, 'ro', label='Solution') 
+            def plot_line(coeff_a, coeff_b, const_c, label_text):
+                if coeff_b != 0:
+                    y_vals = (const_c - coeff_a * x_vals) / coeff_b
+                    ax.plot(x_vals, y_vals, label=label_text)
+                else:
+                    x_vert = const_c / coeff_a
+                    ax.axvline(x=x_vert, label=label_text)
 
-            ax.axhline(0, color='black', linewidth=1) # X-axis
-            ax.axvline(0, color='black', linewidth=1) # Y-axis
+            plot_line(a, b, c, f'{a}x + {b}y = {c}')
+            plot_line(d, e, f, f'{d}x + {e}y = {f}')
+            ax.axhline(0, color='black', linewidth=1.5) # X-axis
+            ax.axvline(0, color='black', linewidth=1.5) # Y-axis
+            ax.grid(True, which='both', linestyle='--', alpha=0.5)
             ax.set_xlim(-limit, limit)
             ax.set_ylim(-limit, limit)
+            ax.set_aspect('equal') 
             
-            ax.grid(True, linestyle=':', alpha=0.6)
+            ax.plot(x_res, y_res, 'ro', markersize=8, label='Intersection')
             ax.legend()
             st.pyplot(fig)
         else:
-            st.warning("Lines are parallel or collinear (no unique solution).")
+            st.error("The lines are parallel or the same. No unique solution exists.")
 elif mode == "Trigonometry":
     st.header("Solve trigonometric functions")
     trigfunc = st.selectbox("Choose function", ["sine", "cosine", "tangent", "inverse sine", "inverse cosine", "inverse tangent"])
@@ -290,6 +294,7 @@ elif mode == "Unit Conversion":
         if st.button("Convert", key="btn_data"):
             result = (input_value * data_units[from_unit]) / data_units[to_unit]
             st.success(f"### {input_value} {from_unit} = {result:.2f} {to_unit}")
+
 
 
 
